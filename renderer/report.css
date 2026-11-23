@@ -1,0 +1,41 @@
+/* Shared by on-screen reports, printing and PDF */
+table.rpt { width: 100%; border-collapse: collapse; font-size: 14px; background: #fff; }
+table.rpt.small { font-size: 12px; }
+table.rpt th, table.rpt td { border: 1px solid #9aa7b5; padding: 4px 6px; text-align: start; white-space: nowrap; }
+table.rpt td.wide, table.rpt th.wide { white-space: normal; min-width: 160px; }
+table.rpt thead th { background: #dde7f3; text-align: center; font-weight: 700; position: sticky; top: 0; z-index: 1; }
+table.rpt thead tr:nth-child(2) th { top: 29px; }
+table.rpt th.grp { background: #c9d8ec; }
+table.rpt td.n { text-align: end; font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: plaintext; }
+[dir="rtl"] table.rpt td.n { text-align: left; }
+[dir="ltr"] table.rpt td.n { text-align: right; }
+table.rpt td.neg { color: #b00020; }
+table.rpt tr.section td { background: #f2f2f2; color: #1f4e79; font-weight: 700; }
+table.rpt tr.subtotal td { background: #fff2cc; font-weight: 700; }
+table.rpt tr.total td { background: #c6e0b4; font-weight: 700; }
+table.rpt tr.warn td { color: #c00000; }
+table.rpt td.lbl { font-weight: 700; }
+table.rpt td.empty, p.empty { text-align: center; color: #777; padding: 20px; }
+table.rpt td.inp { padding: 0; }
+table.rpt td.inp input { width: 90px; border: 0; background: #fffbe6; padding: 5px; font: inherit; text-align: center; }
+
+/* print header */
+.ph { display: flex; align-items: center; justify-content: space-between; border-bottom: 3px double #1f4e79; padding-bottom: 8px; margin-bottom: 10px; }
+.ph-side { width: 22%; font-size: 12px; }
+.ph-date { text-align: end; }
+.ph-logo { max-height: 70px; max-width: 160px; }
+.ph-center { text-align: center; flex: 1; }
+.ph-name { font-size: 24px; font-weight: 700; color: #1f4e79; }
+.ph-title { font-size: 18px; font-weight: 700; }
+.ph-sub { font-size: 14px; color: #333; }
+table.info { width: 100%; margin-bottom: 10px; font-size: 15px; border-collapse: collapse; }
+table.info td { padding: 6px; border: 1px solid #ccc; }
+.sigs { display: flex; justify-content: space-around; margin-top: 50px; text-align: center; font-size: 15px; }
+
+body.print { font-family: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif; margin: 0; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body.print table.rpt thead th { position: static; }
+body.print table.rpt { font-size: 12px; }
+body.print table.rpt.small { font-size: 10px; }
+body.print table.rpt th, body.print table.rpt td { padding: 2px 4px; }
+body.print table.rpt tr { page-break-inside: avoid; }
+body.print thead { display: table-header-group; }

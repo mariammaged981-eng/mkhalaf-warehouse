@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'">
+  <title>مخزن م. خلف</title>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="report.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="login" class="login hidden"></div>
+  <div id="app" class="hidden">
+    <aside id="sidebar">
+      <div class="brand" id="brand"></div>
+      <nav id="nav"></nav>
+      <div class="side-bottom">
+        <button id="langBtn" class="btn btn-light big-w"></button>
+        <button id="logoutBtn" class="btn btn-light big-w hidden"></button>
+      </div>
+    </aside>
+    <main id="main"></main>
+  </div>
+  <div id="modalRoot"></div>
+  <div id="toasts"></div>
+
+  <script src="../shared/i18n.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/combo.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/screens/dashboard.js"></script>
+  <script src="js/screens/master.js"></script>
+  <script src="js/screens/opening.js"></script>
+  <script src="js/screens/docs.js"></script>
+  <script src="js/screens/reports.js"></script>
+  <script src="js/screens/settings.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

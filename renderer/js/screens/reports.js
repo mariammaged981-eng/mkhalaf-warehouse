@@ -1,18 +1,18 @@
 /* Reports: choose, filter, view, print, export Excel / PDF (Arabic or English) */
 const REPORTS = [
-  { key: 'summary', label: 'rptSummary', icon: '📊', filters: ['period', 'group'] },
-  { key: 'client', label: 'rptClient', icon: '🏗️', filters: ['period', 'client', 'mode'] },
-  { key: 'count', label: 'rptCount', icon: '📝', filters: ['period', 'group'] },
-  { key: 'card', label: 'rptCard', icon: '📄', filters: ['item', 'period'] },
-  { key: 'purchases', label: 'rptPurchases', icon: '🚚', filters: ['period', 'supplier'] },
-  { key: 'stock', label: 'rptStock', icon: '📦', filters: ['asof', 'group'] },
-  { key: 'low', label: 'rptLow', icon: '⚠️', filters: [] },
+  { key: 'summary', label: 'rptSummary', icon: 'chart', filters: ['period', 'group'] },
+  { key: 'client', label: 'rptClient', icon: 'building', filters: ['period', 'client', 'mode'] },
+  { key: 'count', label: 'rptCount', icon: 'clipboard', filters: ['period', 'group'] },
+  { key: 'card', label: 'rptCard', icon: 'file', filters: ['item', 'period'] },
+  { key: 'purchases', label: 'rptPurchases', icon: 'truck', filters: ['period', 'supplier'] },
+  { key: 'stock', label: 'rptStock', icon: 'package', filters: ['asof', 'group'] },
+  { key: 'low', label: 'rptLow', icon: 'alert', filters: [] },
 ];
 
 function withLang(lang, fn) { const old = App.lang; App.lang = lang; try { return fn(); } finally { App.lang = old; } }
 
 App.screens.reports = {
-  icon: '📊',
+  icon: 'chart',
   async render(main, params = {}) {
     await loadLists(true);
     const m = currentMonth();
@@ -26,8 +26,8 @@ App.screens.reports = {
       const def = REPORTS.find((r) => r.key === st.report);
       if (itemCombo) { itemCombo.destroy(); itemCombo = null; }
       const f = def.filters;
-      main.innerHTML = `<h1>📊 ${t('reports')}</h1>
-        <div class="rpt-pick">${REPORTS.map((r) => `<button data-r="${r.key}" class="${r.key === st.report ? 'on' : ''}">${r.icon} ${t(r.label)}</button>`).join('')}</div>
+      main.innerHTML = `<h1>${ic('chart')}${t('reports')}</h1>
+        <div class="rpt-pick">${REPORTS.map((r) => `<button data-r="${r.key}" class="${r.key === st.report ? 'on' : ''}">${ic(r.icon)} ${t(r.label)}</button>`).join('')}</div>
         <div class="card filters" id="rf">
           ${f.includes('item') ? `<label style="width:360px"><span>${t('item')}</span><input id="ritem" placeholder="${t('chooseItem')}"></label>` : ''}
           ${f.includes('period') ? periodFilterHtml(st.from, st.to) : ''}
@@ -38,10 +38,10 @@ App.screens.reports = {
           ${f.includes('supplier') ? `<label><span>${t('supplier')}</span><select id="rsupplier"><option value="">${t('allSuppliers')}</option>${App.cache.suppliers.map((g) => `<option value="${g.id}">${esc(g.name)}</option>`).join('')}</select></label>` : ''}
           <label><span>${t('language')}</span><select id="rlang"><option value="ar">عربي</option><option value="en">English</option></select></label>
           <div class="btn-row">
-            <button class="btn btn-primary btn-big" id="rshow">🔎 ${t('show')}</button>
-            <button class="btn btn-light btn-big" id="rprint">🖨️ ${t('print')}</button>
-            <button class="btn btn-light btn-big" id="rxlsx">📗 ${t('exportExcel')}</button>
-            <button class="btn btn-light btn-big" id="rpdf">📕 ${t('exportPdf')}</button>
+            <button class="btn btn-primary btn-big" id="rshow">${ic('search')}${t('show')}</button>
+            <button class="btn btn-light btn-big" id="rprint">${ic('printer')}${t('print')}</button>
+            <button class="btn btn-light btn-big" id="rxlsx">${ic('sheet')}${t('exportExcel')}</button>
+            <button class="btn btn-light btn-big" id="rpdf">${ic('pdf')}${t('exportPdf')}</button>
           </div>
         </div>
         <div class="rpt-view" id="rview"></div>`;

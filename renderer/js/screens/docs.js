@@ -9,7 +9,7 @@ function docEditor(kind) { // kind: 'purchases' | 'issues'
   const types = kind === 'purchases' ? ['purchase', 'purchase_return'] : ['issue', 'issue_return'];
   const partyTable = kind === 'purchases' ? 'suppliers' : 'clients';
   return {
-    icon: kind === 'purchases' ? '⬇️' : '⬆️',
+    icon: kind === 'purchases' ? 'in' : 'out',
     titleKey: kind,
     dirty: false,
     canLeave() { return !this.dirty || confirmBox(App.lang === 'ar' ? 'توجد بيانات لم تُحفظ. الخروج بدون حفظ؟' : 'You have unsaved changes. Leave without saving?', { danger: true }); },
@@ -24,16 +24,16 @@ function docEditor(kind) { // kind: 'purchases' | 'issues'
       const showAvail = () => doc.type === 'issue' || doc.type === 'purchase_return';
 
       main.innerHTML = `
-        <h1>${this.icon} <span id="dtitle"></span>
+        <h1>${ic(this.icon)} <span id="dtitle"></span>
           <div class="type-switch">${types.map((ty) => `<button data-type="${ty}">${t(ty)}</button>`).join('')}</div>
           <span class="spacer"></span>
-          <button class="btn btn-light" id="dlist">📋 ${t('transactions')}</button>
-          <button class="btn btn-light" id="dnew">＋ ${t('newDoc')}</button></h1>
+          <button class="btn btn-light" id="dlist">${ic('list')}${t('transactions')}</button>
+          <button class="btn btn-light" id="dnew">${ic('plus')}${t('newDoc')}</button></h1>
         <div class="card" id="dform">
           <div class="doc-head">
             <label class="field"><span>${t('date')}</span>${dateInput('date', doc.date)}</label>
             <label class="field party"><span>${isIssueKind ? t('client') : t('supplier')}</span>
-              <div class="with-add"><input id="dparty" placeholder="${t('search')}"><button class="btn btn-light" id="dpadd" tabindex="-1" title="${t('addNew')}">＋</button></div></label>
+              <div class="with-add"><input id="dparty" placeholder="${t('search')}"><button class="btn btn-light" id="dpadd" tabindex="-1" title="${t('addNew')}">${ic('plus')}</button></div></label>
             <label class="field ref"><span>${isIssueKind ? t('requestNo') : t('invoiceNo')}</span><input id="dref" value="${esc(doc.ref_no || '')}"></label>
             <label class="field" style="flex:1"><span>${t('notes')}</span><input id="dnotes" value="${esc(doc.notes || '')}"></label>
           </div>
@@ -42,16 +42,16 @@ function docEditor(kind) { // kind: 'purchases' | 'issues'
             <th class="c-num">${t('qty')}</th><th class="c-num">${isIssueKind ? t('cost') : t('price')}</th><th class="c-num">${t('value')}</th><th style="width:44px"></th></tr></thead>
             <tbody id="dlines"></tbody></table>
           <div class="doc-foot">
-            <div><button class="btn btn-light" id="daddline" tabindex="-1">${t('addLine')}</button> <span class="hint">${t('enterHint')}</span></div>
-            <div class="doc-total">${t('docTotal')}: <span id="dtotal">0.00</span></div>
+            <div><button class="btn btn-light" id="daddline" tabindex="-1">${ic('plus')}${t('addLine').replace('+ ', '')}</button> <span class="hint">${t('enterHint')}</span></div>
+            <div class="doc-total">${t('docTotal')} <span id="dtotal">0.00</span></div>
           </div>
-          <div class="doc-foot">
+          <div class="doc-foot actions-bar">
             <div class="btn-row">
-              ${editing ? `<button class="btn btn-danger" id="ddel">🗑️ ${t('del')}</button>` : ''}
+              ${editing ? `<button class="btn btn-danger" id="ddel">${ic('trash')}${t('del')}</button>` : ''}
             </div>
             <div class="btn-row">
-              <button class="btn btn-light btn-big" id="dsaveprint">🖨️ ${t('saveAndPrint')}</button>
-              <button class="btn btn-success btn-big" id="dsave">💾 ${t('saveDoc')}</button>
+              <button class="btn btn-light btn-big" id="dsaveprint">${ic('printer')}${t('saveAndPrint')}</button>
+              <button class="btn btn-success btn-big" id="dsave">${ic('save')}${t('saveDoc')}</button>
             </div>
           </div>
         </div>`;
@@ -108,7 +108,7 @@ function docEditor(kind) { // kind: 'purchases' | 'issues'
         tr.innerHTML = `<td class="ro no"></td><td><input class="li-item" placeholder="${t('search')}"></td>
           ${isIssueKind ? '<td class="ro li-cat"></td>' : ''}<td class="ro li-unit"></td><td class="ro n li-avail c-avail"></td>
           <td><input class="num li-qty"></td><td><input class="num li-price"></td><td class="ro n li-val"></td>
-          <td><button class="btn btn-light btn-sm li-del" tabindex="-1" title="${t('removeLine')}">✕</button></td>`;
+          <td><button class="btn btn-light btn-sm li-del" tabindex="-1" title="${t('removeLine')}">${ic('x')}</button></td>`;
         tbody.appendChild(tr);
         const l = {
           tr, item: null, noEl: $('.no', tr), catEl: $('.li-cat', tr), unitEl: $('.li-unit', tr), availEl: $('.li-avail', tr),
@@ -193,12 +193,12 @@ App.screens.purchases = docEditor('purchases');
 App.screens.issues = docEditor('issues');
 
 App.screens.transactions = {
-  icon: '📋',
+  icon: 'list',
   async render(main, params = {}) {
     const m = currentMonth();
     const st = this.state || (this.state = { from: m.from, to: m.to, type: '', q: '' });
     if (params.kind) st.type = params.kind;
-    main.innerHTML = `<h1>📋 ${t('transactions')}</h1>
+    main.innerHTML = `<h1>${ic('list')}${t('transactions')}</h1>
       <div class="card filters">
         <label><span>${t('docType')}</span><select id="tt">
           <option value="">${t('filterType')}</option>
@@ -222,10 +222,10 @@ App.screens.transactions = {
       const list = rows.filter((r) => matches(`${r.id} ${r.party_name || ''} ${r.ref_no || ''} ${t(r.type)} ${r.notes || ''}`, st.q));
       $('#tbody').innerHTML = list.map((r) => `<tr data-id="${r.id}"><td>${r.id}</td><td>${fmtDate(r.date)}</td><td><span class="badge ${r.type}">${t(r.type)}</span></td>
         <td>${esc(r.party_name || '')}</td><td>${esc(r.ref_no || '')}</td><td>${r.line_count}</td><td class="n">${fmtMoney(r.total)}</td>
-        <td class="acts"><button class="btn btn-light btn-sm" data-a="edit">✏️ ${t('edit')}</button>
-        <button class="btn btn-light btn-sm" data-a="print">🖨️ ${t('print')}</button>
+        <td class="acts"><button class="btn btn-light btn-sm icon-only" data-a="edit" title="${t('edit')}">${ic('pencil')}</button>
+        <button class="btn btn-light btn-sm" data-a="print">${ic('printer')}${t('print')}</button>
         <button class="btn btn-light btn-sm" data-a="pdf">PDF</button>
-        <button class="btn btn-light btn-sm" data-a="del">🗑️</button></td></tr>`).join('')
+        <button class="btn btn-light btn-sm icon-only del" data-a="del" title="${t('del')}">${ic('trash')}</button></td></tr>`).join('')
         || `<tr><td colspan="8" class="muted" style="text-align:center;padding:20px">${t('none')}</td></tr>`;
     };
     bindPeriod(main, load);

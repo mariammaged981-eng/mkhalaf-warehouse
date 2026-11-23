@@ -10,19 +10,19 @@ Offline warehouse / inventory management for Windows. Arabic (RTL) and English, 
 
 **Option A: download the ready installer (recommended)**
 
-1. Open the **Releases** page of this repository (right side of the GitHub page) and download `MKhalafWarehouse-Setup-1.0.0.exe`.
+1. Open the **Releases** page of this repository (right side of the GitHub page) and download `MKhalafWarehouse-Setup-1.1.0.exe`.
    (Every push also builds the files under **Actions → latest run → Artifacts → MKhalafWarehouse-Windows**.)
-2. Run `MKhalafWarehouse-Setup-1.0.0.exe` and follow the steps. A desktop shortcut **مخزن م. خلف** is created.
-   - `MKhalafWarehouse-1.0.0-portable.exe` is the same app without installing (runs from a USB stick).
+2. Run `MKhalafWarehouse-Setup-1.1.0.exe` and follow the steps. A desktop shortcut **مخزن م. خلف** is created.
+   - `MKhalafWarehouse-1.1.0-portable.exe` is the same app without installing (runs from a USB stick).
 3. If Windows SmartScreen shows "Windows protected your PC", click **More info**, then **Run anyway** (the app is not code-signed).
 
 > Every update pushed to `main` rebuilds the Windows and Mac files and attaches them to the Release for the version in `package.json` (bump the version for a new release).
 
-**طريقة التثبيت:** من صفحة المشروع على GitHub افتح **Releases** وحمّل `MKhalafWarehouse-Setup-1.0.0.exe`. لو ظهرت رسالة حماية ويندوز اضغط **More info** ثم **Run anyway**.
+**طريقة التثبيت:** من صفحة المشروع على GitHub افتح **Releases** وحمّل `MKhalafWarehouse-Setup-1.1.0.exe`. لو ظهرت رسالة حماية ويندوز اضغط **More info** ثم **Run anyway**.
 
 ### macOS (for testing on a Mac) — على الماك
 
-1. From **Releases**, download `MKhalafWarehouse-1.0.0-mac-universal.dmg` (works on Apple Silicon M1/M2/M3/M4 and Intel Macs).
+1. From **Releases**, download `MKhalafWarehouse-1.1.0-mac-universal.dmg` (works on Apple Silicon M1/M2/M3/M4 and Intel Macs).
 2. Open the .dmg and drag **M. Khalaf Warehouse** into **Applications**.
 3. The app is not notarized by Apple, so the first time:
    - **Right-click** (or Control-click) the app in Applications → **Open** → **Open**.
@@ -47,7 +47,7 @@ Node.js is needed only to *build* the installer, not to run the app.
 
    On a Mac: `npm install`, `npm start`, and `npm run dist:mac` (creates the .dmg in `dist/`).
 
-4. The installer is `dist\MKhalafWarehouse-Setup-1.0.0.exe`.
+4. The installer is `dist\MKhalafWarehouse-Setup-1.1.0.exe`.
 
 ## 3. First steps — أول استخدام
 

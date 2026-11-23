@@ -50,9 +50,9 @@ function masterScreen(table, titleKey, icon) {
     async render(main) {
       await loadLists(true);
       const isItems = table === 'items';
-      main.innerHTML = `<h1>${icon} ${t(titleKey)} <span class="spacer"></span>
+      main.innerHTML = `<h1>${ic(icon)}${t(titleKey)} <span class="spacer"></span>
         <input class="search" placeholder="${t('search')}" id="mq">
-        <button class="btn btn-primary btn-big" id="madd">＋ ${t(MASTER_NEW[table])}</button></h1>
+        <button class="btn btn-primary btn-big" id="madd">${ic('plus')}${t(MASTER_NEW[table])}</button></h1>
         <div class="tbl-wrap"><table class="grid"><thead><tr>
         ${isItems ? `<th>${t('itemCode')}</th><th>${t('itemName')}</th><th>${t('cat')}</th><th>${t('group')}</th><th>${t('unit')}</th><th>${t('minQty')}</th><th>${t('balance')}</th>`
     : table === 'item_groups' ? `<th>${t('groupCode')}</th><th>${t('groupName')}</th>` : `<th>${t('code')}</th><th>${t('name')}</th><th>${t('phone')}</th><th>${t('notes')}</th>`}
@@ -65,7 +65,7 @@ function masterScreen(table, titleKey, icon) {
           ${isItems ? `<td>${esc(r.code)}</td><td>${esc(r.name)}</td><td>${esc(r.cat || '')}</td><td>${esc(r.group_name || '')}</td><td>${esc(r.unit || '')}</td><td class="n">${fmtQty(r.min_qty || '')}</td>
              <td class="n" style="${bal[r.id] && r.min_qty > 0 && bal[r.id].qty < r.min_qty ? 'color:var(--red);font-weight:700' : ''}">${fmtQty(bal[r.id] ? bal[r.id].qty : 0)}</td>`
     : table === 'item_groups' ? `<td>${esc(r.code)}</td><td>${esc(r.name)}</td>` : `<td>${esc(r.code)}</td><td>${esc(r.name)}</td><td>${esc(r.phone || '')}</td><td>${esc(r.notes || '')}</td>`}
-          <td class="acts">${isItems ? `<button class="btn btn-light btn-sm" data-a="card">📄 ${t('rptCard')}</button> ` : ''}<button class="btn btn-light btn-sm" data-a="edit">✏️ ${t('edit')}</button> <button class="btn btn-light btn-sm" data-a="del">🗑️ ${t('del')}</button></td></tr>`).join('')
+          <td class="acts">${isItems ? `<button class="btn btn-light btn-sm" data-a="card">${ic('file')}${t('rptCard')}</button> ` : ''}<button class="btn btn-light btn-sm icon-only" data-a="edit" title="${t('edit')}">${ic('pencil')}</button> <button class="btn btn-light btn-sm icon-only del" data-a="del" title="${t('del')}">${ic('trash')}</button></td></tr>`).join('')
           || `<tr><td colspan="9" class="muted" style="text-align:center;padding:20px">${t('none')}</td></tr>`;
       };
       draw();
@@ -90,7 +90,7 @@ function masterScreen(table, titleKey, icon) {
     },
   };
 }
-App.screens.items = masterScreen('items', 'items', '📦');
-App.screens.groups = masterScreen('item_groups', 'groups', '🗂️');
-App.screens.clients = masterScreen('clients', 'clients', '🏗️');
-App.screens.suppliers = masterScreen('suppliers', 'suppliers', '🚚');
+App.screens.items = masterScreen('items', 'items', 'package');
+App.screens.groups = masterScreen('item_groups', 'groups', 'folder');
+App.screens.clients = masterScreen('clients', 'clients', 'building');
+App.screens.suppliers = masterScreen('suppliers', 'suppliers', 'truck');

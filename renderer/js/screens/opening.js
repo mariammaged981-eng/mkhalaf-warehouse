@@ -1,12 +1,12 @@
 App.screens.opening = {
-  icon: '🧮',
+  icon: 'calculator',
   async render(main) {
     await loadLists(true);
     const items = App.cache.items;
-    main.innerHTML = `<h1>🧮 ${t('openingBalances')} <span class="spacer"></span>
+    main.innerHTML = `<h1>${ic('calculator')}${t('openingBalances')} <span class="spacer"></span>
       <input class="search" id="oq" placeholder="${t('search')}">
-      <button class="btn btn-light" id="oadd">＋ ${t('newItem')}</button>
-      <button class="btn btn-success btn-big" id="osave">💾 ${t('save')}</button></h1>
+      <button class="btn btn-light" id="oadd">${ic('plus')}${t('newItem')}</button>
+      <button class="btn btn-success btn-big" id="osave">${ic('save')}${t('save')}</button></h1>
       <p class="hint">${t('openingHint')} — ${t('enterHint')}</p>
       <div class="tbl-wrap"><table class="grid"><thead><tr><th>${t('itemCode')}</th><th>${t('itemName')}</th><th>${t('group')}</th><th>${t('unit')}</th>
       <th style="width:150px">${t('openingQty')}</th><th style="width:150px">${t('openingPrice')}</th><th>${t('openingValue')}</th></tr></thead>

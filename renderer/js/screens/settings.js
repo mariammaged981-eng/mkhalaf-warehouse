@@ -1,9 +1,9 @@
 App.screens.settings = {
-  icon: '⚙️',
+  icon: 'settings',
   async render(main) {
     const s = await call('settings.get');
     App.settings = s;
-    main.innerHTML = `<h1>⚙️ ${t('settings')}</h1>
+    main.innerHTML = `<h1>${ic('settings')}${t('settings')}</h1>
     <div class="settings-grid">
       <div class="card"><h2>${t('general')}</h2>
         <div class="form-grid">
@@ -11,28 +11,28 @@ App.screens.settings = {
           <label class="full"><span>${t('appNameEn')}</span><input id="sen" value="${esc(s.app_name_en)}" dir="ltr"></label>
           <label class="full"><span>${t('costMethod')}</span><select id="scost"><option value="avg">${t('costAvg')}</option><option value="last">${t('costLast')}</option></select></label>
         </div>
-        <div class="btn-row" style="margin-top:14px"><button class="btn btn-success btn-big" id="ssave">💾 ${t('save')}</button></div>
+        <div class="btn-row" style="margin-top:14px"><button class="btn btn-success btn-big" id="ssave">${ic('save')}${t('save')}</button></div>
       </div>
       <div class="card"><h2>${t('logo')}</h2>
         <p>${s.logo ? `<img class="logo-prev" src="${s.logo}">` : `<span class="muted">${t('none')}</span>`}</p>
-        <div class="btn-row"><button class="btn btn-primary" id="slogo">🖼️ ${t('chooseLogo')}</button>
+        <div class="btn-row"><button class="btn btn-primary" id="slogo">${ic('image')}${t('chooseLogo')}</button>
         ${s.logo ? `<button class="btn btn-light" id="slogox">${t('removeLogo')}</button>` : ''}</div>
       </div>
-      <div class="card"><h2>💾 ${t('backup')} / ${t('restore')}</h2>
-        <div class="btn-row"><button class="btn btn-success btn-big" id="sbak">💾 ${t('backup')}</button>
-        <button class="btn btn-light btn-big" id="sres">♻️ ${t('restore')}</button></div>
+      <div class="card"><h2>${ic('save')}${t('backup')} / ${t('restore')}</h2>
+        <div class="btn-row"><button class="btn btn-success btn-big" id="sbak">${ic('save')}${t('backup')}</button>
+        <button class="btn btn-light btn-big" id="sres">${ic('restore')}${t('restore')}</button></div>
         <p class="hint">${t('autoBackups')}</p>
         <p class="hint">${t('dbLocation')}: <span dir="ltr">${esc(s.db_file)}</span></p>
-        <div class="btn-row"><button class="btn btn-light btn-sm" id="sfold">📂 ${t('openFolder')}</button>
-        <button class="btn btn-light btn-sm" id="sfoldb">📂 ${t('backup')}</button></div>
+        <div class="btn-row"><button class="btn btn-light btn-sm" id="sfold">${ic('folderOpen')}${t('openFolder')}</button>
+        <button class="btn btn-light btn-sm" id="sfoldb">${ic('folderOpen')}${t('backup')}</button></div>
       </div>
-      <div class="card"><h2>🔒 ${t('password')}</h2>
-        <p><b>${s.has_password ? t('passwordOn') : t('passwordOff')}</b></p>
+      <div class="card"><h2>${ic('lock')}${t('password')}</h2>
+        <p><span class="status-pill ${s.has_password ? 'on' : ''}">${ic('lock')}${s.has_password ? t('passwordOn') : t('passwordOff')}</span></p>
         <div class="btn-row"><input type="password" id="spw" placeholder="${t('newPassword')}">
         <button class="btn btn-primary" id="spwset">${t('setPassword')}</button>
         ${s.has_password ? `<button class="btn btn-light" id="spwx">${t('removePassword')}</button>` : ''}</div>
       </div>
-      <div class="card"><h2>🧪 ${t('dataSection')}</h2>
+      <div class="card"><h2>${ic('flask')}${t('dataSection')}</h2>
         <div class="btn-row"><button class="btn btn-light" id="ssample">${t('loadSample')}</button>
         <button class="btn btn-danger" id="sclear">${t('clearData')}</button></div>
       </div>

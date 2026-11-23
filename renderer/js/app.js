@@ -1,8 +1,8 @@
 /* Shell: navigation, language toggle, login */
 const NAV = [
-  ['dashboard', '🏠'], '-', ['purchases', '⬇️'], ['issues', '⬆️'], ['transactions', '📋'], '-',
-  ['items', '📦'], ['groups', '🗂️'], ['clients', '🏗️'], ['suppliers', '🚚'], ['opening', '🧮', 'openingBalances'], '-',
-  ['reports', '📊'], ['settings', '⚙️'],
+  ['dashboard', 'home'], 'secWork', ['purchases', 'in'], ['issues', 'out'], ['transactions', 'list'], 'secData',
+  ['items', 'package'], ['groups', 'folder'], ['clients', 'building'], ['suppliers', 'truck'], ['opening', 'calculator', 'openingBalances'], 'secOther',
+  ['reports', 'chart'], ['settings', 'settings'],
 ];
 
 async function go(name, params) {
@@ -22,17 +22,18 @@ async function go(name, params) {
 function applyLang() {
   document.documentElement.lang = App.lang;
   document.documentElement.dir = App.lang === 'ar' ? 'rtl' : 'ltr';
-  $('#nav').innerHTML = NAV.map((n) => (n === '-' ? '<hr>' : `<button data-s="${n[0]}"><span class="ico">${n[1]}</span>${t(n[2] || n[0])}</button>`)).join('');
+  $('#nav').innerHTML = NAV.map((n) => (typeof n === 'string' ? `<div class="sec">${t(n)}</div>` : `<button data-s="${n[0]}"><span class="ico">${ic(n[1])}</span>${t(n[2] || n[0])}</button>`)).join('');
   $$('#nav button').forEach((b) => { b.onclick = () => go(b.dataset.s); });
-  $('#langBtn').textContent = '🌐 ' + t('langToggle');
-  $('#logoutBtn').textContent = '🔒 ' + t('logout');
+  $('#langBtn').innerHTML = ic('globe') + t('langToggle');
+  $('#logoutBtn').innerHTML = ic('lock') + t('logout');
   document.title = appName();
 }
 
 async function refreshShell() {
   App.settings = await call('settings.get');
   App.lang = App.settings.lang === 'en' ? 'en' : 'ar';
-  $('#brand').innerHTML = `${App.settings.logo ? `<img src="${App.settings.logo}">` : ''}<div class="bn">${esc(appName())}</div>`;
+  $('#brand').innerHTML = `<div class="mark">${App.settings.logo ? `<img src="${App.settings.logo}">` : ic('warehouse')}</div>
+    <div><div class="bn">${esc(appName())}</div><div class="bs">${esc(App.lang === 'ar' ? App.settings.app_name_en : App.settings.app_name_ar)}</div></div>`;
   applyLang();
   $('#logoutBtn').classList.toggle('hidden', !App.settings.has_password);
   $$('#nav button').forEach((b) => b.classList.toggle('active', b.dataset.s === App.current));
@@ -42,7 +43,7 @@ function showLogin() {
   const el = $('#login');
   $('#app').classList.add('hidden');
   el.classList.remove('hidden');
-  el.innerHTML = `<div class="box">${App.settings.logo ? `<img src="${App.settings.logo}">` : ''}<div class="bn">${esc(appName())}</div>
+  el.innerHTML = `<div class="box">${App.settings.logo ? `<img src="${App.settings.logo}">` : `<div class="mark">${ic('warehouse')}</div>`}<div class="bn">${esc(appName())}</div>
     <input type="password" id="lpw" placeholder="${t('enterPassword')}" style="font-size:20px;text-align:center">
     <button class="btn btn-primary btn-big" id="lbtn">${t('login')}</button></div>`;
   const tryLogin = async () => {

@@ -8,7 +8,7 @@
       dashboard: 'الرئيسية', purchases: 'الوارد (المشتريات)', issues: 'المنصرف (العملاء)',
       transactions: 'كل الحركات', items: 'الأصناف', groups: 'المجموعات', clients: 'المحاجر / العملاء',
       suppliers: 'الموردين', openingBalances: 'أرصدة أول المدة', reports: 'التقارير', settings: 'الإعدادات',
-      logout: 'خروج',
+      logout: 'خروج', secWork: 'الحركات', secData: 'البيانات الأساسية', secOther: 'التقارير والإعدادات',
       // common
       add: 'إضافة', edit: 'تعديل', del: 'حذف', save: 'حفظ', cancel: 'إلغاء', close: 'إغلاق', search: 'بحث...',
       yes: 'نعم', no: 'لا', confirmDelete: 'هل أنت متأكد من الحذف؟', saved: 'تم الحفظ', deleted: 'تم الحذف',
@@ -80,7 +80,7 @@
       dashboard: 'Home', purchases: 'Incoming (Purchases)', issues: 'Outgoing (Clients)',
       transactions: 'All transactions', items: 'Items', groups: 'Groups', clients: 'Sites / Clients',
       suppliers: 'Suppliers', openingBalances: 'Opening balances', reports: 'Reports', settings: 'Settings',
-      logout: 'Log out',
+      logout: 'Log out', secWork: 'Transactions', secData: 'Master data', secOther: 'Reports & settings',
       add: 'Add', edit: 'Edit', del: 'Delete', save: 'Save', cancel: 'Cancel', close: 'Close', search: 'Search...',
       yes: 'Yes', no: 'No', confirmDelete: 'Are you sure you want to delete?', saved: 'Saved', deleted: 'Deleted',
       print: 'Print', exportExcel: 'Export Excel', exportPdf: 'Export PDF', show: 'Show', newDoc: 'New',

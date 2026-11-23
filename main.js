@@ -43,7 +43,10 @@ function createWindow() {
     icon: path.join(__dirname, 'build', 'icon.png'),
     webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, spellcheck: false },
   });
-  Menu.setApplicationMenu(null);
+  // Windows: no menu bar. macOS: keep a minimal menu so Cmd+C / Cmd+V / Cmd+Q work.
+  Menu.setApplicationMenu(process.platform === 'darwin'
+    ? Menu.buildFromTemplate([{ role: 'appMenu' }, { role: 'editMenu' }, { role: 'windowMenu' }])
+    : null);
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
   win.once('ready-to-show', () => { win.maximize(); win.show(); updateTitle(); });
   win.on('page-title-updated', (e) => e.preventDefault());

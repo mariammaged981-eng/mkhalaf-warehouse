@@ -10,15 +10,25 @@ Offline warehouse / inventory management for Windows. Arabic (RTL) and English, 
 
 **Option A: download the ready installer (recommended)**
 
-1. Open the repository on GitHub, then the **Actions** tab, then the latest green **Build Windows installer** run.
-2. Under **Artifacts**, download **MKhalafWarehouse-Windows** and unzip it.
-3. Run `MKhalafWarehouse-Setup-1.0.0.exe` and follow the steps. A desktop shortcut **مخزن م. خلف** is created.
+1. Open the **Releases** page of this repository (right side of the GitHub page) and download `MKhalafWarehouse-Setup-1.0.0.exe`.
+   (Every push also builds the files under **Actions → latest run → Artifacts → MKhalafWarehouse-Windows**.)
+2. Run `MKhalafWarehouse-Setup-1.0.0.exe` and follow the steps. A desktop shortcut **مخزن م. خلف** is created.
    - `MKhalafWarehouse-1.0.0-portable.exe` is the same app without installing (runs from a USB stick).
-4. If Windows SmartScreen shows "Windows protected your PC", click **More info**, then **Run anyway** (the app is not code-signed).
+3. If Windows SmartScreen shows "Windows protected your PC", click **More info**, then **Run anyway** (the app is not code-signed).
 
-> When a version tag such as `v1.0.0` is pushed, the same files are attached to a GitHub **Release** too.
+> New versions are published by pushing a tag such as `v1.0.1`; the Windows and Mac files are attached to that Release automatically.
 
-**طريقة التثبيت:** من صفحة المشروع على GitHub افتح **Actions** ثم آخر تشغيل ناجح، وحمّل الملف **MKhalafWarehouse-Windows** وفك الضغط، ثم شغّل `MKhalafWarehouse-Setup-1.0.0.exe`. لو ظهرت رسالة حماية ويندوز اضغط **More info** ثم **Run anyway**.
+**طريقة التثبيت:** من صفحة المشروع على GitHub افتح **Releases** وحمّل `MKhalafWarehouse-Setup-1.0.0.exe`. لو ظهرت رسالة حماية ويندوز اضغط **More info** ثم **Run anyway**.
+
+### macOS (for testing on a Mac) — على الماك
+
+1. From **Releases**, download `MKhalafWarehouse-1.0.0-mac-universal.dmg` (works on Apple Silicon M1/M2/M3/M4 and Intel Macs).
+2. Open the .dmg and drag **M. Khalaf Warehouse** into **Applications**.
+3. The app is not notarized by Apple, so the first time:
+   - **Right-click** (or Control-click) the app in Applications → **Open** → **Open**.
+   - If macOS still refuses ("cannot be opened" or "is damaged"): open **System Settings → Privacy & Security**, scroll down and click **Open Anyway** next to the app's name, then confirm.
+   - Last resort: open **Terminal** and run `xattr -cr "/Applications/M. Khalaf Warehouse.app"`, then open the app normally.
+4. Data on the Mac is stored in `~/Library/Application Support/M. Khalaf Warehouse/data/`.
 
 ## 2. Build it yourself (for developers) — البناء من الكود
 
@@ -34,6 +44,8 @@ Node.js is needed only to *build* the installer, not to run the app.
    npm test             :: quick self-test of the stock calculations
    npm run dist         :: build the installer + portable exe into the dist\ folder
    ```
+
+   On a Mac: `npm install`, `npm start`, and `npm run dist:mac` (creates the .dmg in `dist/`).
 
 4. The installer is `dist\MKhalafWarehouse-Setup-1.0.0.exe`.
 

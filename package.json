@@ -9,7 +9,8 @@
     "dist:installer": "electron-builder --win nsis --x64",
     "test": "node test/smoke.js",
     "test:e2e": "node test/e2e.js",
-    "dist:zip": "electron-builder --win zip --x64"
+    "dist:zip": "electron-builder --win zip --x64",
+    "dist:mac": "electron-builder --mac dmg zip --universal"
   },
   "author": "M. Khalaf",
   "license": "UNLICENSED",
@@ -71,6 +72,31 @@
     "electronLanguages": [
       "ar",
       "en-US"
-    ]
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "icon": "build/icon.png",
+      "category": "public.app-category.business",
+      "identity": "-",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "artifactName": "MKhalafWarehouse-${version}-mac-${arch}.${ext}"
+    },
+    "dmg": {
+      "title": "M. Khalaf Warehouse"
+    }
   }
 }

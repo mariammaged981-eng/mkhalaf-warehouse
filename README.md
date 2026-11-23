@@ -16,7 +16,7 @@ Offline warehouse / inventory management for Windows. Arabic (RTL) and English, 
    - `MKhalafWarehouse-1.0.0-portable.exe` is the same app without installing (runs from a USB stick).
 3. If Windows SmartScreen shows "Windows protected your PC", click **More info**, then **Run anyway** (the app is not code-signed).
 
-> New versions are published by pushing a tag such as `v1.0.1`; the Windows and Mac files are attached to that Release automatically.
+> Every update pushed to `main` rebuilds the Windows and Mac files and attaches them to the Release for the version in `package.json` (bump the version for a new release).
 
 **طريقة التثبيت:** من صفحة المشروع على GitHub افتح **Releases** وحمّل `MKhalafWarehouse-Setup-1.0.0.exe`. لو ظهرت رسالة حماية ويندوز اضغط **More info** ثم **Run anyway**.
 
